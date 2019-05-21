@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Painel</title>
+</head>
+
+<body>
+    <div class="caption">Atendimentos</div>
+    <div id="table">
+        <div class="header-row row">
+            <span class="cell primary">Empresa</span>
+            <span class="cell">Nome</span>
+            <span class="cell">Motivo</span>
+            <span class="cell">Data</span>
+            <span class="cell">Finalizar</span>
+        </div>
+        <% for(let chamado of chamados) {%>
+        <div class="row">
+            <input type="radio" name="expand">
+            <span class="cell primary" data-label="Empresa"><%= chamado.empresa %></span>
+            <span class="cell" data-label="Nome"><%= chamado.nome%></span>
+            <span class="cell" data-label="Motivo"><%= chamado.motivo%></span>
+            <span class="cell" data-label="Data"><%= chamado.data_criacao %></span>
+            <span class="cell" data-label="Finalizar"><a href="">Finalizar</a></span>
+        </div>
+        <% } %>
+    </div>
+
+</body>
+
+</html>
