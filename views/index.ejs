@@ -26,12 +26,45 @@
             <span class="cell" data-label="Nome"><%= chamado.nome%></span>
             <span class="cell" data-label="Motivo"><%= chamado.motivo%></span>
             <span class="cell" data-label="Data"><%= chamado.data_criacao %></span>
-            <span class="cell" data-label="Finalizar"><a
-                    href="http://127.0.0.1:300/<%= chamado.id %>">Finalizar</a></span>
+            <span class="cell" data-label="Finalizar"><a href="#" id="finaliza"
+                    onclick="fin(<%= chamado.id%>)">Finalizar</a></span>
         </div>
         <% } %>
     </div>
+    <script src="js/socket.io.js"></script>
+    <script>
+        function fin(id) {
+            var put = {};
+            put.finalizado = "S";
+            put.data_finalizado = new Date;
+            var json = JSON.stringify(put);
+            var http = new XMLHttpRequest();
+            var url = "http://127.0.0.1:3000/chamado/" + id;
 
+            console.log(url);
+            http.open("PUT", url, true);
+            http.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+
+            http.onload = function () {
+                console.log(http.responseText);
+            };
+
+            http.send(json);
+
+        }
+
+    </script>
+    <script>
+        var socket = io('http://127.0.0.1:3000');
+
+        socket.on('finalizaAtendimento', function () {
+            window.location.reload();
+        });
+
+        socket.on('novoAtendimento', function () {
+            window.location.reload();
+        });
+    </script>
 </body>
 
 </html>
